@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online shop</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<script>
+    function removeItem(itemId) {
+        fetch('/deleteFromCart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ itemId: itemId })
+        })
+        .then(response => {
+            window.location.href = '/cart';
+        })
+        .catch(error => {
+            console.log("Error in removeItem()");
+        });
+    }
+
+    function cancel() {
+        fetch('/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => {
+            window.location.href = '/';
+        })
+        .catch(error => {
+            console.log("Error in cancel()");
+        });
+    }
+</script>
+<body class="bg-secondary">
+    <div class="container col-md-4 bg-light border text-center rounded my-4">
+        <h1 class="p-3">Your shopping cart:</h1>
+        <div class="row px-5">
+            <div class="col-md-12">
+                <ul class="list-group ">
+                    <% products.forEach(p => { %>
+                        <li class="list-group-item list-group-item-action list-group-item-light rounded" id="<%= p.id %>">
+                            <h4><%= p.name %><br> <%= p.price %>$</h4>
+                            <button class="btn btn-info btn-lg" onClick="removeItem('<%= p._id %>')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                </svg>
+                            </button>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+        <h2 class="my-3">Total price: <%= totalPrice %>$</h2>
+        <form action="/buy" method="post">
+            <div class="btn-group" role="group">
+                <button class="btn btn-info my-3 mx-1" <%= totalPrice == 0 ? 'disabled' : '' %> type="submit">Buy products</button>
+                <button class="btn btn-danger my-3 mx-1" type="button" onclick="cancel()">Cancel <br>(deletes all items in cart)</button>
+                <button class="btn btn-info my-3 mx-1" <%= success == false ? 'disabled' : '' %> type="button" onclick="history.back()">Back to shop</button>
+            </div>
+        </form>
+        <% if (success == false) { %>
+            <script>
+                alert("Some of the products in your shopping cart were sold out!");
+            </script>
+        <% } %>
+    </div>
+</body>
+</html>

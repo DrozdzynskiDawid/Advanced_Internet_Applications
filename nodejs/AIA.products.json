@@ -1,0 +1,51 @@
+[{
+  "_id": 1,
+  "name": "AMD Ryzen 5 5500",
+  "price": 84.99
+},
+{
+  "_id": 2,
+  "name": "Intel Core i5-13600K",
+  "price": 309.99
+},
+{
+  "_id": 3,
+  "name": "Intel Core i5-11400",
+  "price": 139.40
+},
+{
+  "_id": 4,
+  "name": "AMD Ryzen 5 3600",
+  "price": 83.49
+},
+{
+  "_id": 5,
+  "name": "AMD Ryzen 9 3900X",
+  "price": 216.99
+},
+{
+  "_id": 6,
+  "name": "Intel Xeon W-1350",
+  "price": 335.99
+},
+{
+  "_id": 7,
+  "name": "Intel Core i3-10100",
+  "price": 96.01
+},
+{
+  "_id": 8,
+  "name": "AMD Ryzen 5 4500",
+  "price": 75.09
+},
+{
+  "_id": 9,
+  "name": "Intel Core i7-13700KF",
+  "price": 390.98
+},
+{
+  "_id": 10,
+  "name": "Intel Celeron G4930",
+  "price": 64.10
+}
+]

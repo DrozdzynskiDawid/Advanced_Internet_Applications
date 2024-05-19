@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online shop</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-secondary">
+    <div class="container col-md-4 bg-light border text-center rounded my-4">
+        <h1 class="p-3">List of available products</h1>
+        <h2 class="p-3">Choose items to buy:</h2>
+        
+            <form action="/submit" method="post" class="form-group">
+                <div class="list-group ">
+                    <% products.forEach(p => { %>
+                        <li class="list-group-item list-group-item-action list-group-item-light">
+                            <input class="form-check-input me-1" type="checkbox" name="item" id="<%= p.id %>" value="<%= p.id %>">
+                            <label class="form-check-label stretched-link px-3" for="<%= p.id %>"><b><%= p.name %></b> <br> <h4><%= p.price %>$</h4></label>
+                        </li>
+                    <% }); %>
+                  </div>
+                <button type="submit" class="btn btn-info my-4 btn-lg">Checkout</button>
+            </form>
+            <% if(success == true){%>
+                <script>
+                    alert("Purchase succeeded!");
+                </script>
+            <% } %>
+        
+    </div>
+</body>
+</html>
